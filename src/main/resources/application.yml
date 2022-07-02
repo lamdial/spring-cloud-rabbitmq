@@ -1,0 +1,49 @@
+## https://stackoverflow.com/questions/64988601/how-to-configure-spring-boot-to-bind-a-supplier-to-a-rabbitmq-queue-with-spring
+## https://medium.com/swlh/understanding-java-8s-consumer-supplier-predicate-and-function-c1889b9423d
+## https://developer.okta.com/blog/2020/04/15/spring-cloud-stream
+## https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream-binder-rabbit.html#spring-cloud-stream-binder-rabbit-reference
+
+destination: my-exchange-dest
+routingKey1: my-routing-key
+routingKey2: other-routing-key
+
+spring:
+  cloud:
+    function:
+      definition: fournisseur;premierConsommateur;deuxiemeConsommateur;troisiemeConsommateur
+    stream:
+      bindings:
+        fournisseur-out-0:
+          destination: ${destination}
+          #producer:
+            #auto-startup: true
+            #required-groups: betaGroupe
+            #error-channel-enabled: true
+        premierConsommateur-in-0:
+          destination: ${destination}
+          group: alphaGroupe
+        deuxiemeConsommateur-in-0:
+          destination: ${destination}
+          group: alphaGroupe
+        troisiemeConsommateur-in-0:
+          destination: ${destination}
+          group: betaGroupe
+      rabbit:
+        bindings:
+          fournisseur-out-0:
+            producer:
+              bindingRoutingKey: ${routingKey1}
+          premierConsommateur-in-0:
+            consumer:
+              bindingRoutingKey: ${routingKey1}
+          deuxiemeConsommateur-in-0:
+            consumer:
+              bindingRoutingKey: ${routingKey1}
+          troisiemeConsommateur-in-0:
+            consumer:
+              bindingRoutingKey: ${routingKey2}
+  rabbitmq:
+    addresses: amqp://guest:guest@localhost:5672
+
+
+## 

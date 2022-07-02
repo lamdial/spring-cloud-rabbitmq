@@ -1,0 +1,39 @@
+
+## https://x-team.com/blog/set-up-rabbitmq-with-docker-compose/
+version: "3.9"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/Users/lamaranadiallo/Tools/rabbitmq/data/
+        - ~/.docker-conf/rabbitmq/log/:/Users/lamaranadiallo/Tools/rabbitmq/log/
+    networks:
+        - rabbitmq_go_net
+
+#  mqseries:
+#    image: ibmcom/mq:latest
+#    ports:
+#    - "1414:1414"
+#    - "9443:9443"
+#    hostname: mq
+#    environment:
+#    - LICENSE=accept
+#    - MQ_QMGR_NAME=QM1
+#    container_name: mqserver
+#    stdin_open: true
+#    tty: true
+#    restart: always
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge
+
+############3
+
+
+#---
+
