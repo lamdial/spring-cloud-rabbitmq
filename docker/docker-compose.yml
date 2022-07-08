@@ -14,19 +14,21 @@ services:
     networks:
         - rabbitmq_go_net
 
-#  mqseries:
-#    image: ibmcom/mq:latest
-#    ports:
-#    - "1414:1414"
-#    - "9443:9443"
-#    hostname: mq
-#    environment:
-#    - LICENSE=accept
-#    - MQ_QMGR_NAME=QM1
-#    container_name: mqserver
-#    stdin_open: true
-#    tty: true
-#    restart: always
+## Console IBM MQ : https://localhost:9443/ibmmq/console/login.html
+## https://github.com/Neotys-Labs/Connect-To-IBM-MQ-Queue
+  mqseries:
+    image: ibmcom/mq:latest
+    ports:
+    - "1414:1414"
+    - "9443:9443"
+    hostname: mq
+    environment:
+    - LICENSE=accept
+    - MQ_QMGR_NAME=QM1
+    container_name: mqserver
+    stdin_open: true
+    tty: true
+    restart: always
 
 networks:
   rabbitmq_go_net:

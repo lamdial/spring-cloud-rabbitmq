@@ -45,5 +45,14 @@ spring:
   rabbitmq:
     addresses: amqp://guest:guest@localhost:5672
 
+## https://developer.ibm.com/tutorials/mq-jms-application-development-with-spring-boot/
+ibm:
+  mq:
+    queue-manager: QM1
+    channel: DEV.ADMIN.SVRCONN
+    conn-name: localhost(1414)
+    user: admin
+    password: passw0rd
+    
 
 ## 
