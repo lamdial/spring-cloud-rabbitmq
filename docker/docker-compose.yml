@@ -1,9 +1,13 @@
 
+
 ## https://x-team.com/blog/set-up-rabbitmq-with-docker-compose/
 version: "3.9"
 services:
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    build:
+      context: .
+      dockerfile: rabbitmq-dockerfile
+    #image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
         - 5672:5672
@@ -11,6 +15,8 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/Users/lamaranadiallo/Tools/rabbitmq/data/
         - ~/.docker-conf/rabbitmq/log/:/Users/lamaranadiallo/Tools/rabbitmq/log/
+        #- ./rabbit/enabled_plugins:/etc/rabbitmq/enabled_plugins
+        #- ./rabbit/plugins:/usr/lib/rabbitmq/plugins
     networks:
         - rabbitmq_go_net
 

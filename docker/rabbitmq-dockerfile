@@ -1,0 +1,7 @@
+## docker build -t rabbitmq-custom .
+## https://tekloon.dev/how-to-enable-plugins-in-rabbitmq
+
+FROM rabbitmq:latest
+RUN rabbitmq-plugins enable rabbitmq_management rabbitmq_tracing
+RUN rabbitmq-plugins enable rabbitmq_federation rabbitmq_federation_management
+RUN rabbitmq-plugins enable rabbitmq_shovel rabbitmq_shovel_management
